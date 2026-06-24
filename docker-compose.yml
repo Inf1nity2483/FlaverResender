@@ -1,0 +1,20 @@
+services:
+  resender_v2:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: flaver_bot_resender_v2
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      STATE_FILE_V2: /data/state-v2.json
+    volumes:
+      - resender_v2_data:/data
+    # If TELEGRAM_PROXY_URL points to proxy on host, add:
+    # extra_hosts:
+    #   - "host.docker.internal:host-gateway"
+    # and use in .env:
+    # TELEGRAM_PROXY_URL=http://host.docker.internal:<port>
+
+volumes:
+  resender_v2_data:
